@@ -1,0 +1,67 @@
+//Fibonacci Series using Recursion 
+#include<iostream>
+#include<stdio.h>
+#include<cstdlib>
+#include<math.h>
+#include<string>
+
+
+using namespace std;
+
+
+int fib(int n) 
+{ 
+if (n <= 1) 
+	return n; 
+return fib(n-1) + fib(n-2); 
+} 
+
+
+
+
+int main ()
+{
+    int n;
+    int num;
+    int radius;
+    int max;
+    double dfo; //distance from origin
+    int xsig;
+    int ysig;
+    double x;
+    double y;    
+    cout << "Max?";
+    cin >> max;
+
+    srand(time(NULL));
+    num = rand()%18+2;
+    n = fib(num);
+    radius = n;
+    cout << radius<<endl;
+    
+    for (int k =1;k<=max;k++)
+        {
+        x = (rand()%(radius*2000)/1000.0);
+        y = (rand()%(radius*2000)/1000.0);
+        xsig = rand()%2;
+        ysig = rand()%2;
+        
+        if (xsig == 1)
+        {
+            x = x*-1;
+        }
+        if (ysig == 1)
+        {
+            y = y*-1;
+        }
+        
+        dfo = sqrt(pow(x,2)+pow(y,2));
+        
+        if (dfo > radius)
+        {
+        }
+    
+        cout << "Trial:"<<k<<"             x="<<x<<"                y="<<y<<"                          DFO:"<<dfo <<endl;
+        }
+    
+}
