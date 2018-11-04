@@ -1,0 +1,100 @@
+//Fibonacci Series using Recursion 
+#include<iostream>
+#include<stdio.h>
+#include<cstdlib>
+#include<math.h>
+#include<string>
+
+
+using namespace std;
+
+
+int fib(int n) 
+{ 
+if (n <= 1) 
+	return n; 
+return fib(n-1) + fib(n-2); 
+} 
+
+
+
+
+int main ()
+{
+    //variables
+    int n;
+    int num;
+    int radius;
+    double dfo; //distance from origin
+    int xsig;
+    int ysig;
+    double x;
+    double y;
+    double areac;
+    double areas;
+    double prob;
+    double perc;
+    double pi = 3.1415;
+    int hits = 0;
+    
+    
+    //random number generation
+    srand(time(NULL));
+
+    
+    //repeating trials
+    for (int t = 1 ; t<=10;t++)
+    {
+        //radius gen
+        num = rand()%18+2;
+        n = fib(num);
+        radius = n;
+        hits = 0;
+        
+        //calc probablity
+        areac = pi*pow(radius, 2);
+        areas = pow (2*radius, 2);
+        prob = areac/areas;
+        perc = prob * 100;
+        
+        if (t <=9)
+        {
+            cout << "Trail:" << "00" << t <<endl;
+        }
+        else if (t >=9 && t < 100)
+        {
+            cout << "Trail:" << "0" << t <<endl;
+        }
+        else
+        {
+            cout << "Trial:" << t <<endl;
+        }
+        cout << "The Radius is:" <<radius << endl;
+        cout << "The probablity of hit is:" << perc<<endl;
+        
+        for (int k =1;k<=1000000;k++)
+            {
+            x = (rand()%(radius*1000)/1000.0);//random x point
+            y = (rand()%(radius*1000)/1000.0);//random y point
+            xsig = rand()%2;//sig of x
+            ysig = rand()%2;//sig of y
+            
+            if (xsig == 1)
+            {
+                x = x*-1;
+            }
+            if (ysig == 1)
+            {
+                y = y*-1;
+            }
+        
+            dfo = sqrt(pow(x,2)+pow(y,2));//calc distance from origin
+            
+            if (dfo <= radius)
+            {
+                hits = hits + 1;
+            }
+            }
+        cout << "During the simulation, Hit count was:" << hits << endl <<endl;   
+    }
+}
