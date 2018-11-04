@@ -1,0 +1,102 @@
+//Fibonacci Series using Recursion 
+#include<iostream>
+#include<stdio.h>
+#include<cstdlib>
+#include<math.h>
+#include<string>
+
+
+using namespace std;
+
+// fibonacci series function
+int fib(int n) 
+{ 
+if (n <= 1) 
+	return n; 
+return fib(n-1) + fib(n-2); 
+} 
+
+
+
+//main function
+int main ()
+{
+    //variables
+    int n;//variable for fib
+    int num;//random number from 20-2 for fib input
+    int radius;//radius of circle
+    double dfo; //distance from origin
+    int xsig;//determines x's sign
+    int ysig;//determines y's sign
+    double x;//x varible in plain
+    double y;//y variable in plain
+    double areac; // area of circle
+    double areas; // area of square
+    double prob; // probablity of hitting
+    double perc; // percentage of hitting
+    double pi = 3.1415; // pi
+    int hits = 0; // sets hits equal to 0
+    
+    
+    //random number generation
+    srand(time(NULL)); // seed for random number gen
+
+    
+    //repeating trials
+    for (int t = 1 ; t<=10;t++) // number of trials repeated
+    {
+        //radius gen
+        num = rand()%18+2;//sets num equal to random number from 2 - 20
+        n = fib(num); // runs num through fib function
+        radius = n; // sets radius = to n
+        hits = 0; // sets hits equal to 0
+        
+        //calc probablity
+        areac = pi*pow(radius, 2); // area of cirlce calc
+        areas = pow (2*radius, 2); // area of square calc
+        prob = areac/areas; // probablity calc
+        perc = prob * 100; // percentage calc
+        
+        //if statement that set trial number up correctly
+        if (t <=9)
+        {
+            cout << "Trail:" << "00" << t <<endl;
+        }
+        else if (t >=9 && t < 100)
+        {
+            cout << "Trail:" << "0" << t <<endl;
+        }
+        else
+        {
+            cout << "Trial:" << t <<endl;
+        }
+        
+        cout << "The Radius is:" <<radius << endl;//outputs radius
+        cout << "The probablity of hit is:" << perc<<endl; // outputs percentage
+        
+        for (int k =1;k<=1000000;k++)//runs loop for each trial 1,000,000 times
+            {
+            x = (rand()%(radius*1000)/1000.0);//random x point
+            y = (rand()%(radius*1000)/1000.0);//random y point
+            xsig = rand()%2;//sig of x
+            ysig = rand()%2;//sig of y
+            
+            if (xsig == 1)//sets sign of x
+            {
+                x = x*-1;
+            }
+            if (ysig == 1)//sets sign of y
+            {
+                y = y*-1;
+            }
+        
+            dfo = sqrt(pow(x,2)+pow(y,2));//calc distance from origin
+            
+            if (dfo <= radius)
+            {
+                hits = hits + 1;//add hit if in circle
+            }
+            }
+        cout << "During the simulation, Hit count was:" << hits << endl <<endl;//outputs number of hits in trial   
+    }
+}
