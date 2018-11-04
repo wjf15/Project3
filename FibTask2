@@ -1,0 +1,95 @@
+//Fibonacci Series using Recursion 
+#include<iostream>
+#include<stdio.h>
+#include<cstdlib>
+#include<math.h>
+#include<string>
+
+
+using namespace std;
+
+//fibonacci series function
+int fib(int n) 
+{ 
+if (n <= 1) 
+	return n; 
+return fib(n-1) + fib(n-2); 
+} 
+
+
+
+
+int main ()
+{
+    //variables
+    int n; //variable for fib
+    int num;//random number from 20-2 for fib input
+    int radius;//radius of circle
+    double dfo; //distance from origin
+    int xsig; //determines x's sign
+    int ysig; //determines y's sign
+    double x; //x varible in plain
+    double y; //y variable in plain
+    int trhits; //number of hits in trial
+    int tothits; // total number of hits
+    int avghits; // average number of hits
+    
+    
+    //random number generation + radius
+    srand(time(NULL)); // seed for random number generator
+    num = rand()%18+2; // sets num to random number between 20 - 2
+    n = fib(num); // runs num through fib function outputing n
+    radius = n; // sets radius equal to n
+    trhits = 0; // sets trial hits to 0
+    tothits = 0; // sets total hits to 0
+
+    
+    //repeating trials
+    for (int t = 1 ; t<=250;t++) // for loop to count number of trials
+    {
+        trhits = 0; // sets trial number equal to 0
+        //if statements that set trial number up correctly
+        if (t <=9) // trials 1 - 9
+        {
+            cout << "Trail:" << "00" << t;
+        }
+        else if (t >=10 && t < 100) // trial number 10 - 99
+        {
+            cout << "Trail:" << "0" << t;
+        }
+        else // trials from 100 - 250
+        {
+            cout << "Trial:" << t;
+        }
+        cout << ": Radius:" <<radius; // outputs radius
+        
+        for (int k =1;k<=1000000;k++) // for loop counting loops in trial
+            {
+            x = (rand()%(radius*1000)/1000.0);//random x point
+            y = (rand()%(radius*1000)/1000.0);//random y point
+            xsig = rand()%2;//sig of x
+            ysig = rand()%2;//sig of y
+            
+            if (xsig == 1) //makes x negative
+            {
+                x = x*-1;
+            }
+            if (ysig == 1)//makes y negative
+            {
+                y = y*-1;
+            }
+        
+            dfo = sqrt(pow(x,2)+pow(y,2));//calc distance from origin
+            
+            if (dfo <= radius) // if inside circle add to counts
+            {
+                trhits = trhits + 1;
+                tothits = tothits + 1;
+                
+            }
+            }
+        cout << "    # of Hits:" << trhits<<endl; // outputs number of trial hits
+    }
+    avghits = tothits/250; // averages number of hits
+    cout << "Average # of hits: " << avghits; // outputs total hits
+}
